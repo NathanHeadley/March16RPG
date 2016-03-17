@@ -29,13 +29,12 @@ public class InterfaceHandler extends BaseHandler {
         player = player_;
         bitmapDecoder = new BitmapDecoder(context_);
         GUI gui;
-        //TODO: Add Interfaces
         //region General Button Interface
         gui = new GUI(0, 0, null, true);
-        gui.addButton(new Button(164, 628, 100, bitmapDecoder.decode("arrow_north"), bitmapDecoder.decode("arrow_north_press"), true));
-        gui.addButton(new Button(308, 772, 101, bitmapDecoder.decode("arrow_east"), bitmapDecoder.decode("arrow_east_press"), true));
-        gui.addButton(new Button(164, 916, 102, bitmapDecoder.decode("arrow_south"), bitmapDecoder.decode("arrow_south_press"), true));
-        gui.addButton(new Button(20, 772, 103, bitmapDecoder.decode("arrow_west"), bitmapDecoder.decode("arrow_west_press"), true));
+        gui.addButton(new Button(164, 628, 144, 144, 100, bitmapDecoder.decode("arrow_north"), bitmapDecoder.decode("arrow_north_press"), true));
+        gui.addButton(new Button(308, 772, 144, 144, 101, bitmapDecoder.decode("arrow_east"), bitmapDecoder.decode("arrow_east_press"), true));
+        gui.addButton(new Button(164, 916, 144, 144, 102, bitmapDecoder.decode("arrow_south"), bitmapDecoder.decode("arrow_south_press"), true));
+        gui.addButton(new Button(20,  772, 144, 144, 103, bitmapDecoder.decode("arrow_west"), bitmapDecoder.decode("arrow_west_press"), true));
         GUIs.addElement(gui);
         //endregion
     }

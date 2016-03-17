@@ -15,7 +15,7 @@ public class TextField extends BaseGUI {
         x = x_;
         y = y_;
         text = text_;
-        paint.setTextSize(40); //TODO: Set default text size in values file?
+        paint.setTextSize(40);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setColor(Color.BLACK);
         visible = visible_;

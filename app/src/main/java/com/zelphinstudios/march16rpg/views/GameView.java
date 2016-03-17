@@ -140,7 +140,7 @@ public class GameView extends SurfaceView implements Runnable {
             }
             //endregion
             //region Draw Player
-            canvas.drawBitmap(player.getBitmap(0), 960, 480, null); //FIXME: player.getDirection()
+            canvas.drawBitmap(player.getBitmap(player.getDirection()), 960, 480, null);
             if(player.isInCombat()) {
                 float healthMax = player.getHealthMax();
                 float healthCurrent = player.getHealthCurrent();

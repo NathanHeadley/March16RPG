@@ -63,9 +63,8 @@ public class GameActivity extends Activity implements View.OnTouchListener {
             float y = motionEvent_.getY();
             for(GUI gui : interfaceHandler.getGUIs()) {
                 for (Button button : gui.getButtons()) {
-                    // TODO: Add button widths and heights (144 is custom)
-                    if(x >= button.getX() && x <= (button.getX() + 144)
-                            && y >= button.getY() && y <= (button.getY() + 144)) {
+                    if(x >= button.getX() && x <= (button.getX() + button.getWidth())
+                            && y >= button.getY() && y <= (button.getY() + button.getHeight())) {
                         actionHandler.action(button.getAction());
                         button.setState(1);
                     }

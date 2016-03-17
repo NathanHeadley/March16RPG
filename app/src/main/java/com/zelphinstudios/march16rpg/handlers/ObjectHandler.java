@@ -27,7 +27,7 @@ public class ObjectHandler extends BaseHandler {
         // Entities - Id, X, Y
 
         //region Entity List
-        entities.addElement(new ObjectEntity(0, 5, 5));
+        entities.addElement(new ObjectEntity(objects.get(0), 1, 1));
         //endregion
     }
     //endregion

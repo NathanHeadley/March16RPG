@@ -21,7 +21,7 @@ public class NPCEntity extends BaseEntity {
     //endregion
 
     //region Constructor
-    public NPCEntity(NPC npc_, float x_, float y_) {
+    public NPCEntity(NPC npc_, int x_, int y_) {
         id = npc_.getId();
         x = x_;
         y = y_;

@@ -14,18 +14,6 @@ public class Item extends BaseInstance {
     //endregion
 
     //region Constructor
-    public Item(int id_, String name_, int value_, int meleePower_, int rangePower_, int defence_,
-                int equipSlot_, boolean stackable_, Bitmap bitmap_) {
-        id = id_;
-        name = name_;
-        value = value_;
-        meleePower = meleePower_;
-        rangePower = rangePower_;
-        defence = defence_;
-        equipSlot = equipSlot_;
-        stackable = stackable_;
-        bitmap[0] = bitmap_;
-    }
     public Item() {
         id = -1;
         name = "null";

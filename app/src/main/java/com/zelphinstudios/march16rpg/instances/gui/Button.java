@@ -5,17 +5,21 @@ import android.graphics.Bitmap;
 public class Button extends BaseGUI {
 
     //region Variables
-    private int action,
-            state;
+    private int width,
+                height,
+                action,
+                state;
 
     private Bitmap pressed,
             notPressed;
     //endregion
 
     //region Constructor
-    public Button(int x_, int y_, int action_, Bitmap pressed_, Bitmap notPressed_, boolean visible_) {
+    public Button(int x_, int y_, int width_, int height_, int action_, Bitmap pressed_, Bitmap notPressed_, boolean visible_) {
         x = x_;
         y = y_;
+        width = width_;
+        height = height_;
         action = action_;
         state = 0;
         pressed = pressed_;
@@ -28,6 +32,12 @@ public class Button extends BaseGUI {
     //endregion
 
     //region Getters
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
     public int getAction() {
         return action;
     }
@@ -43,6 +53,12 @@ public class Button extends BaseGUI {
     //endregion
 
     //region Setters
+    public void setWidth(int width_) {
+        width = width_;
+    }
+    public void setHeight(int height_) {
+        height = height_;
+    }
     public void setAction(int action_) {
         action = action_;
     }

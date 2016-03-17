@@ -16,22 +16,22 @@ public class Player extends BaseInstance {
     //region Variables
     private Context context;
 
-    private int direction,
-            meleePower,
-            rangePower,
-            inventory[],
-            inventoryQuantity[],
-            quests[],
-            levels[],
-            xp[];
+    private int x,
+                y,
+                direction,
+                meleePower,
+                rangePower,
+                inventory[],
+                inventoryQuantity[],
+                quests[],
+                levels[],
+                xp[];
 
-    private float x,
-            y,
-            meleeSpeed,
-            rangeSpeed,
-            defence,
-            healthMax,
-            healthCurrent;
+    private float meleeSpeed,
+                  rangeSpeed,
+                  defence,
+                  healthMax,
+                  healthCurrent;
 
     private String images[] = new String[4]; // Used for saving bitmaps
 
@@ -72,82 +72,13 @@ public class Player extends BaseInstance {
 
     //region Methods
     private void loadGame() {
-        FileLoader fileLoader = new FileLoader(context);
-        Vector<Item> itemList = fileLoader.loadItemList();
-        for(Item i : itemList) {
-            Log.e("Nathan", "----------------");
-            Log.e("Nathan", " ");
-            Log.e("Nathan", "ITEM: " + i.getId());
-            Log.e("Nathan", "name = " + i.getName());
-            Log.e("Nathan", "value = " + i.getValue());
-            Log.e("Nathan", "mPower = " + i.getMeleePower());
-            Log.e("Nathan", "rPower = " + i.getRangePower());
-            Log.e("Nathan", "defence = " + i.getDefence());
-            Log.e("Nathan", "equip = " + i.getEquipSlot());
-            Log.e("Nathan", "stack = " + i.getStackable());
-            Log.e("Nathan", "bitmap = " + i.getBitmap(0));
-            Log.e("Nathan", "bitmap = " + i.getBitmap(1));
-            Log.e("Nathan", "bitmap = " + i.getBitmap(2));
-            Log.e("Nathan", "bitmap = " + i.getBitmap(3));
-            Log.e("Nathan", " ");
-            Log.e("Nathan", "----------------");
-        }
-        Vector<NPC> npcList = fileLoader.loadNPCList();
-        for(NPC n : npcList) {
-            Log.e("Nathan", "----------------");
-            Log.e("Nathan", " ");
-            Log.e("Nathan", "NPC: " + n.getId());
-            Log.e("Nathan", "name = " + n.getName());
-            Log.e("Nathan", "chat = " + n.getChat());
-            Log.e("Nathan", "level = " + n.getLevel());
-            Log.e("Nathan", "attack = " + n.getAttack());
-            Log.e("Nathan", "defence = " + n.getDefence());
-            Log.e("Nathan", "speed = " + n.getSpeed());
-            Log.e("Nathan", "healthmax = " + n.getHealthMax());
-            Log.e("Nathan", "attackRange = " + n.getAttackRange());
-            Log.e("Nathan", "walkRange = " + n.getWalkRange());
-            Log.e("Nathan", "bitmap = " + n.getBitmap(0));
-            Log.e("Nathan", "bitmap = " + n.getBitmap(1));
-            Log.e("Nathan", "bitmap = " + n.getBitmap(2));
-            Log.e("Nathan", "bitmap = " + n.getBitmap(3));
-            Log.e("Nathan", " ");
-            Log.e("Nathan", "----------------");
-        }
-        Vector<Object> objectList = fileLoader.loadObjectList();
-        for(Object o : objectList) {
-            Log.e("Nathan", "----------------");
-            Log.e("Nathan", " ");
-            Log.e("Nathan", "OBJECT: " + o.getId());
-            Log.e("Nathan", "name = " + o.getName());
-            Log.e("Nathan", "width = " + o.getWidth());
-            Log.e("Nathan", "height = " + o.getHeight());
-            Log.e("Nathan", "action = " + o.getAction());
-            Log.e("Nathan", "walkable = " + o.isWalkable());
-            Log.e("Nathan", "bitmap = " + o.getBitmap(0));
-            Log.e("Nathan", "bitmap = " + o.getBitmap(1));
-            Log.e("Nathan", "bitmap = " + o.getBitmap(2));
-            Log.e("Nathan", "bitmap = " + o.getBitmap(3));
-            Log.e("Nathan", " ");
-            Log.e("Nathan", "----------------");
-        }
-        Vector<Terrain> terrainList = fileLoader.loadTerrainList();
-        for(Terrain t : terrainList) {
-            Log.e("Nathan", "----------------");
-            Log.e("Nathan", " ");
-            Log.e("Nathan", "TERRAIN: " + t.getId());
-            Log.e("Nathan", "name = " + t.getName());
-            Log.e("Nathan", "visible = " + t.isVisible());
-            Log.e("Nathan", "walkable = " + t.isWalkable());
-            Log.e("Nathan", "bitmap = " + t.getBitmap(0));
-            Log.e("Nathan", " ");
-            Log.e("Nathan", "----------------");
-        }
+        // TODO: Load Player file
     }
 
     private void newPlayer() {
         name = "";
-        x = 0f;
-        y = 0f;
+        x = 0;
+        y = 0;
         direction = 2;
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = 0;
@@ -199,10 +130,10 @@ public class Player extends BaseInstance {
     //endregion
 
     //region Getters
-    public float getX() {
+    public int getX() {
         return x;
     }
-    public float getY() {
+    public int getY() {
         return y;
     }
     public int getDirection() {
@@ -277,10 +208,10 @@ public class Player extends BaseInstance {
     //endregion
 
     //region Setters
-    public void setX(float x_) {
+    public void setX(int x_) {
         x = x_;
     }
-    public void setY(float y_) {
+    public void setY(int y_) {
         y = y_;
     }
     public void setDirection(int direction_) {

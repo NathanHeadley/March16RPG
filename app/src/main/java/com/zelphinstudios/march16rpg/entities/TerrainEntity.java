@@ -6,7 +6,7 @@ public class TerrainEntity extends BaseEntity {
     //endregion
 
     //region Constructor
-    public TerrainEntity(int id_, float x_, float y_) {
+    public TerrainEntity(int id_, int x_, int y_) {
         id = id_;
         x = x_;
         y = y_;

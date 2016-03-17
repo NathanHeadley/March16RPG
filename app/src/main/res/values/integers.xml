@@ -3,4 +3,5 @@
     <integer name="inventSize">12</integer>
     <integer name="numberQuests">0</integer>
     <integer name="skills">7</integer>
+    <integer name="textSize">40</integer>
 </resources>

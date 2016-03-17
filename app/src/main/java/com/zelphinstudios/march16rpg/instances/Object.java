@@ -13,32 +13,6 @@ public class Object extends BaseInstance {
     //endregion
 
     //region Constructor
-    public Object(int id_, String name_, int width_, int height_, int action_, boolean walkable_,
-                  Bitmap bitmap0_) {
-        id = id_;
-        name = name_;
-        width = width_;
-        height = height_;
-        action = action_;
-        walkable = walkable_;
-        bitmap[0] = bitmap0_;
-        bitmap[1] = bitmap0_;
-        bitmap[2] = bitmap0_;
-        bitmap[3] = bitmap0_;
-    }
-    public Object(int id_, String name_, int width_, int height_, int action_, boolean walkable_,
-                  Bitmap bitmap0_, Bitmap bitmap1_, Bitmap bitmap2_, Bitmap bitmap3_) {
-        id = id_;
-        name = name_;
-        width = width_;
-        height = height_;
-        action = action_;
-        walkable = walkable_;
-        bitmap[0] = bitmap0_;
-        bitmap[1] = bitmap1_;
-        bitmap[2] = bitmap2_;
-        bitmap[3] = bitmap3_;
-    }
     public Object() {
         id = -1;
         name = "null";

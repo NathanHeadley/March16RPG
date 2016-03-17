@@ -17,45 +17,16 @@ public class NPC extends BaseInstance {
     //endregion
 
     //region Constructor
-    // Attacking NPC
-    public NPC(int id_, String name_, int level_, int attack_, float defence_, float speed_,
-               float healthMax_, int attackRange_, int walkRange_, Bitmap bitmap0_, Bitmap bitmap1_,
-               Bitmap bitmap2_, Bitmap bitmap3_) {
-        id = id_;
-        name = name_;
-        chat = -1;
-        level = level_;
-        attack = attack_;
-        defence = defence_;
-        speed = speed_;
-        healthMax = healthMax_;
-        attackRange = attackRange_;
-        walkRange = walkRange_;
-        bitmap[0] = bitmap0_;
-        bitmap[1] = bitmap1_;
-        bitmap[2] = bitmap2_;
-        bitmap[3] = bitmap3_;
-    }
-    // Talking NPC
-    public NPC(int id_, String name_, int chat_, int walkRange_, Bitmap bitmap0_, Bitmap bitmap1_,
-               Bitmap bitmap2_, Bitmap bitmap3_) {
-        id = id_;
-        name = name_;
-        chat = chat_;
-        level = 0; attack = 0; defence = 0; speed = 0; healthMax = 0; attackRange = 0;
-        walkRange = walkRange_;
-        bitmap[0] = bitmap0_;
-        bitmap[1] = bitmap1_;
-        bitmap[2] = bitmap2_;
-        bitmap[3] = bitmap3_;
-    }
-    // Empty for Loading from file
     public NPC() {
         id = -1;
         name = "null";
         chat = -1;
         level = -1;
-        attack = 0; defence = 0; speed = 0; healthMax = 0; attackRange = 0;
+        attack = 0;
+        defence = 0;
+        speed = 0;
+        healthMax = 0;
+        attackRange = 0;
         walkRange = 0;
         bitmap[0] = null;
         bitmap[1] = null;

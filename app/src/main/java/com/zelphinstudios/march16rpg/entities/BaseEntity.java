@@ -4,8 +4,8 @@ public class BaseEntity {
 
     //region Variables
     // Protected allows sub classes to use the variables
-    protected float x,
-            y;
+    protected int x,
+                  y;
 
     protected int id,
             width,
@@ -26,10 +26,10 @@ public class BaseEntity {
     public int getId() {
         return id;
     }
-    public float getX() {
+    public int getX() {
         return x;
     }
-    public float getY() {
+    public int getY() {
         return y;
     }
     public int getWidth() {
@@ -50,10 +50,10 @@ public class BaseEntity {
     public void setId(int id_) {
         id = id_;
     }
-    public void setX(float x_) {
+    public void setX(int x_) {
         x = x_;
     }
-    public void setY(float y_) {
+    public void setY(int y_) {
         y = y_;
     }
     public void setWidth(int width_) {
