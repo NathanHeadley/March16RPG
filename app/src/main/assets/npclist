@@ -1,0 +1,22 @@
+# NPC List Resource File
+#
+# Stores the list of NPCs for the game
+#
+#  Variables;		  Defaults;
+#	id					-1
+#	name				"null"
+#	chat				-1
+#	level				-1
+#	attack				0
+#	defence				0
+#	speed				0
+#	healthMax			0
+#	attackRange			0
+#	walkRange			0
+#	bitmap				null
+#	bitmap1				null
+#	bitmap2				null
+#	bitmap3				null
+#
+[id=0|name=firstNPC|chat=1|walkrange=0|bitmap=null_npc|bitmap1=null_npc|bitmap2=null_npc|bitmap3=null_npc]
+[id=1|name=Attack Me|level=3|attack=5|defence=2|speed=1.5|healthmax=50|attackrange=1|walkrange=10|bitmap=null_npc|bitmap1=null_npc|bitmap2=null_npc|bitmap3=null_npc]

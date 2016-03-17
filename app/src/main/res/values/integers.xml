@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="inventSize">12</integer>
+    <integer name="numberQuests">0</integer>
+    <integer name="skills">7</integer>
+</resources>

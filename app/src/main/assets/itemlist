@@ -1,0 +1,21 @@
+# Item List Resource File
+#
+# Stores the list of items for the game
+#
+#  Variables;		  Defaults;						Equip Slot Values;
+#	id					-1									-1			Unequipable
+#	name				"null"								0			Helmet
+#	value				0									1			Body
+#	meleepower			0									2			Legs
+#	rangepower			0									3			Weapon
+#	defence				0									4			Shield
+#	equipslot			-1
+#	stackable			false
+#	bitmap				null
+#	bitmap1				null
+#	bitmap2				null
+#	bitmap3				null
+#
+[id=0|name=fishing net|value=1|equipslot=3|bitmap=fishingnet]
+[id=1|name=axe|value=2|equipslot=3|bitmap=axe]
+[id=2|name=nathan's weapon|value=0|meleepower=9000|rangepower=9000|defence=9000|equipslot=3|bitmap=nathanweapon]

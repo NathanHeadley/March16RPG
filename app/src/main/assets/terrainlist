@@ -1,0 +1,13 @@
+# Object List Resource File
+#
+# Stores the list of objects for the game
+#
+#  Variables;		  Defaults;
+#	id					-1
+#	name				"null"
+#	visible				true
+#	walkable			true
+#	bitmap				null
+#
+[id=0|name=grass|bitmap=null_terrain]
+[id=3|name=hidden door|visible=false|walkable=false|bitmap=null_terrain]
