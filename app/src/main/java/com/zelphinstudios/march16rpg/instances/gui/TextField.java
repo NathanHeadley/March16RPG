@@ -11,12 +11,12 @@ public class TextField extends BaseGUI {
     //endregion
 
     //region Constructor
-    public TextField(int x_, int y_, String text_, boolean visible_) {
+    public TextField(int x_, int y_, String text_, Paint.Align align_, boolean visible_) {
         x = x_;
         y = y_;
         text = text_;
         paint.setTextSize(40);
-        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextAlign(align_);
         paint.setColor(Color.BLACK);
         visible = visible_;
     }

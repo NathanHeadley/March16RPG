@@ -3,6 +3,7 @@ package com.zelphinstudios.march16rpg.handlers;
 import android.content.Context;
 import android.util.Log;
 
+import com.zelphinstudios.march16rpg.entities.NPCEntity;
 import com.zelphinstudios.march16rpg.entities.ObjectEntity;
 import com.zelphinstudios.march16rpg.instances.Player;
 import com.zelphinstudios.march16rpg.util.BitmapDecoder;
@@ -20,9 +21,9 @@ public class ActionHandler extends BaseHandler {
     //endregion
 
     //region Constructor
-    public ActionHandler(Context context_, Player player_, InterfaceHandler interfaceHandler_,
-                         ObjectHandler objectHandler_, NPCHandler npcHandler_,
-                         TerrainHandler terrainHandler_, ItemHandler itemHandler_) {
+    public ActionHandler(Context context_, Player player_,  InterfaceHandler interfaceHandler_,
+                         ObjectHandler objectHandler_,      NPCHandler npcHandler_,
+                         TerrainHandler terrainHandler_,    ItemHandler itemHandler_) {
         context = context_;
         bitmapDecoder = new BitmapDecoder(context);
         player = player_;
@@ -37,43 +38,59 @@ public class ActionHandler extends BaseHandler {
     //region Methods
     public void action(int actionId_) {
         switch(actionId_) {
-            case 100: // A button
-                if(objectAt(0, -32) < 0) {
-                    player.setY(player.getY() - 32);
+            case 100:
+                if(objectAt(0, -1) < 0) {
+                    player.changeY(-1);
                 }
                 player.setDirection(0);
                 break;
+
             case 101:
-                if(objectAt(32, 0) < 0) {
-                    player.setX(player.getX() + 32);
+                if(objectAt(1, 0) < 0) {
+                    player.changeX(1);
                 }
                 player.setDirection(1);
                 break;
+
             case 102:
-                if(objectAt(0, 32) < 0) {
-                    player.setY(player.getY() + 32);
+                if(objectAt(0, 1) < 0) {
+                    player.changeY(1);
                 }
                 player.setDirection(2);
                 break;
+
             case 103:
-                if(objectAt(-32, 0) < 0) {
-                    player.setX(player.getX() - 32);
+                if(objectAt(-1, 0) < 0) {
+                    player.changeX(-1);
                 }
                 player.setDirection(3);
                 break;
+
             case 104:
-                int objectId = -1;
-                if(player.getDirection() == 0) {
-                    objectId = objectIdAt(0, -96);
-                } else if(player.getDirection() == 1) {
-                    objectId = objectIdAt(96, 0);
-                } else if(player.getDirection() == 2) {
-                    objectId = objectIdAt(0, 96);
-                } else if(player.getDirection() == 3) {
-                    objectId = objectIdAt(-96, 0);
-                }
-                if(objectId >= 0) {
-                    objectInteract(objectHandler.getObjects().get(objectId).getAction());
+                if(interfaceHandler.getOpen() == 0) {
+                    int npcId = -1;
+                    int objectId = -1;
+                    if (player.getDirection() == 0) {
+                        npcId = npcIdAt(0, -1);
+                        objectId = objectIdAt(0, -1);
+                    } else if (player.getDirection() == 1) {
+                        npcId = npcIdAt(1, 0);
+                        objectId = objectIdAt(1, 0);
+                    } else if (player.getDirection() == 2) {
+                        npcId = npcIdAt(0, 1);
+                        objectId = objectIdAt(0, 1);
+                    } else if (player.getDirection() == 3) {
+                        npcId = npcIdAt(-1, 0);
+                        objectId = objectIdAt(-1, 0);
+                    }
+                    if (objectId >= 0) {
+                        objectInteract(objectHandler.getObjects().get(objectId).getAction());
+                    }
+                    if (npcId >= 0) {
+                        interfaceHandler.sendChat(npcHandler.getNpcs().get(npcId).getChat());
+                    }
+                } else {
+                    interfaceHandler.sendChat(interfaceHandler.getChat() + 1);
                 }
                 break;
         }
@@ -82,9 +99,21 @@ public class ActionHandler extends BaseHandler {
     private void objectInteract(int action_) {
         switch(action_) {
             case 3:
-                Log.e("Nathan", "Action 3 carried out.");
+                interfaceHandler.sendChat(1);
                 break;
         }
+    }
+
+    private int npcAt(int x_, int y_) {
+        int newX = player.getX() + x_;
+        int newY = player.getY() + y_;
+        for(NPCEntity n : npcHandler.getEntities()) {
+            if(newX > (n.getX() - 96) && newX < n.getX() + n.getWidth()
+                    && newY > (n.getY() - 96) && newY < n.getY() + n.getHeight()) {
+                return n.getId();
+            }
+        }
+        return -1;
     }
 
     private int objectAt(int x_, int y_) {
@@ -92,20 +121,30 @@ public class ActionHandler extends BaseHandler {
         int newY = player.getY() + y_;
         for(ObjectEntity o : objectHandler.getEntities()) {
             if(newX > (o.getX() - 96) && newX < o.getX() + o.getWidth()
-                        && newY > (o.getY() - 96) && newY < o.getY() + o.getHeight()) {
+                    && newY > (o.getY() - 96) && newY < o.getY() + o.getHeight()) {
                 return o.getId();
             }
         }
         return -1;
     }
 
-    private int objectIdAt(int x_, int y_) {
+    private int npcIdAt(int x_, int y_) {
         int newX = player.getX() + x_;
         int newY = player.getY() + y_;
+        for(NPCEntity n : npcHandler.getEntities()) {
+            if(newX >= n.getX() && newX <= n.getX() + n.getWidth() - 96) {
+                if(newY >= n.getY() && newY <= n.getY() + n.getHeight() - 96) {
+                    return n.getId();
+                }
+            }
+        }
+        return -1;
+    }
+
+    private int objectIdAt(int x_, int y_) {
+        int newX = player.getX() + (x_ * 96);
+        int newY = player.getY() + (y_ * 96);
         for(ObjectEntity o : objectHandler.getEntities()) {
-            /*if(newX == o.getX() && newY == o.getY()) {
-                return o.getId();
-            }*/
             if(newX >= o.getX() && newX <= o.getX() + o.getWidth() - 96) {
                 if(newY >= o.getY() && newY <= o.getY() + o.getHeight() - 96) {
                     return o.getId();

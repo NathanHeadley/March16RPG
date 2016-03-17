@@ -1,6 +1,7 @@
 package com.zelphinstudios.march16rpg.handlers;
 
 import android.content.Context;
+import android.graphics.Paint;
 
 import com.zelphinstudios.march16rpg.instances.Player;
 import com.zelphinstudios.march16rpg.instances.gui.Button;
@@ -19,8 +20,8 @@ public class InterfaceHandler extends BaseHandler {
 
     private Vector<GUI> GUIs = new Vector<>();
 
-    private int open,
-            chat;
+    private int open = 0,
+                chat;
     //endregion
 
     //region Constructor
@@ -31,11 +32,20 @@ public class InterfaceHandler extends BaseHandler {
         GUI gui;
         //region General Button Interface
         gui = new GUI(0, 0, null, true);
-        gui.addButton(new Button(164, 628, 144, 144, 100, bitmapDecoder.decode("arrow_north"), bitmapDecoder.decode("arrow_north_press"), true));
-        gui.addButton(new Button(308, 772, 144, 144, 101, bitmapDecoder.decode("arrow_east"), bitmapDecoder.decode("arrow_east_press"), true));
-        gui.addButton(new Button(164, 916, 144, 144, 102, bitmapDecoder.decode("arrow_south"), bitmapDecoder.decode("arrow_south_press"), true));
-        gui.addButton(new Button(20,  772, 144, 144, 103, bitmapDecoder.decode("arrow_west"), bitmapDecoder.decode("arrow_west_press"), true));
-        gui.addButton(new Button(0,0,100,100,104,bitmapDecoder.decode("arrow_north"), bitmapDecoder.decode("arrow_north"), true));
+        gui.addButton(new Button(164, 628, 144, 144, 100, bitmapDecoder.decode("arrow_north"),  bitmapDecoder.decode("arrow_north_press"), true));
+        gui.addButton(new Button(308, 772, 144, 144, 101, bitmapDecoder.decode("arrow_east"),   bitmapDecoder.decode("arrow_east_press"), true));
+        gui.addButton(new Button(164, 916, 144, 144, 102, bitmapDecoder.decode("arrow_south"),  bitmapDecoder.decode("arrow_south_press"), true));
+        gui.addButton(new Button( 20, 772, 144, 144, 103, bitmapDecoder.decode("arrow_west"),   bitmapDecoder.decode("arrow_west_press"), true));
+        gui.addButton(new Button(  0,   0, 270, 270, 104, bitmapDecoder.decode("button"),        bitmapDecoder.decode("button"), true));
+        GUIs.addElement(gui);
+        gui = new GUI(0, 0, null, true); //inventory GUI TODO: MAKE ME
+        GUIs.addElement(gui);
+        gui = new GUI(510, 664, bitmapDecoder.decode("chat_back"), false);
+        gui.addTextField(new TextField(450, 80,  "", Paint.Align.CENTER, true));
+        gui.addTextField(new TextField(450, 135, "", Paint.Align.CENTER, true));
+        gui.addTextField(new TextField(450, 190, "", Paint.Align.CENTER, true));
+        gui.addTextField(new TextField(450, 245, "", Paint.Align.CENTER, true));
+        gui.addTextField(new TextField(450, 300, "", Paint.Align.CENTER, true));
         GUIs.addElement(gui);
         //endregion
     }

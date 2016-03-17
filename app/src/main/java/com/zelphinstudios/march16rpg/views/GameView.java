@@ -195,7 +195,7 @@ public class GameView extends SurfaceView implements Runnable {
                     for(TextField textField : gui.getTextFields()) {
                         if(textField.isVisible()) {
                             canvas.drawText(textField.getText(),
-                                    textField.getX(), textField.getY(), textField.getPaint());
+                                    gui.getX() + textField.getX(), gui.getY() + textField.getY(), textField.getPaint());
                         }
                     }
                 }

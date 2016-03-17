@@ -214,6 +214,12 @@ public class Player extends BaseInstance {
     public void setY(int y_) {
         y = y_;
     }
+    public void changeX(int x_) {
+        x += (x_ * 32);
+    }
+    public void changeY(int y_) {
+        y += (y_ * 32);
+    }
     public void setDirection(int direction_) {
         direction = direction_;
     }
