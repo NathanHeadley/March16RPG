@@ -35,6 +35,7 @@ public class InterfaceHandler extends BaseHandler {
         gui.addButton(new Button(308, 772, 144, 144, 101, bitmapDecoder.decode("arrow_east"), bitmapDecoder.decode("arrow_east_press"), true));
         gui.addButton(new Button(164, 916, 144, 144, 102, bitmapDecoder.decode("arrow_south"), bitmapDecoder.decode("arrow_south_press"), true));
         gui.addButton(new Button(20,  772, 144, 144, 103, bitmapDecoder.decode("arrow_west"), bitmapDecoder.decode("arrow_west_press"), true));
+        gui.addButton(new Button(0,0,100,100,104,bitmapDecoder.decode("arrow_north"), bitmapDecoder.decode("arrow_north"), true));
         GUIs.addElement(gui);
         //endregion
     }
