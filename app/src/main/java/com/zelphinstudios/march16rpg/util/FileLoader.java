@@ -183,10 +183,10 @@ public class FileLoader {
                                 object.setName(subLine[1]);
                                 break;
                             case "width":
-                                object.setWidth(Integer.parseInt(subLine[1]));
+                                object.setWidth(96*Integer.parseInt(subLine[1]));
                                 break;
                             case "height":
-                                object.setHeight(Integer.parseInt(subLine[1]));
+                                object.setHeight(96*Integer.parseInt(subLine[1]));
                                 break;
                             case "action":
                                 object.setAction(Integer.parseInt(subLine[1]));

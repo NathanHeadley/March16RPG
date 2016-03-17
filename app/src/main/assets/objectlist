@@ -14,4 +14,4 @@
 #	bitmap2				null
 #	bitmap3				null
 #
-[id=0|name=firstObject|width=96|height=96|action=3|bitmap=null_object|bitmap1=null_object|bitmap2=null_object|bitmap3=null_object]
+[id=0|name=firstObject|width=2|height=2|action=3|bitmap=null_object|bitmap1=null_object|bitmap2=null_object|bitmap3=null_object]

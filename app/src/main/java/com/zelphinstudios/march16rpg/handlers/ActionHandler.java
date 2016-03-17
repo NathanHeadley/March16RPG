@@ -62,17 +62,15 @@ public class ActionHandler extends BaseHandler {
                 player.setDirection(3);
                 break;
             case 104:
-                //TODO: Add player direction into interaction
-                //FIXME: I can use objects from miles away
                 int objectId = -1;
                 if(player.getDirection() == 0) {
-                    objectId = objectAt(0, -32);
+                    objectId = objectIdAt(0, -96);
                 } else if(player.getDirection() == 1) {
-                    objectId = objectAt(32, 0);
+                    objectId = objectIdAt(96, 0);
                 } else if(player.getDirection() == 2) {
-                    objectId = objectAt(0, 32);
+                    objectId = objectIdAt(0, 96);
                 } else if(player.getDirection() == 3) {
-                    objectId = objectAt(-32, 0);
+                    objectId = objectIdAt(-96, 0);
                 }
                 if(objectId >= 0) {
                     objectInteract(objectHandler.getObjects().get(objectId).getAction());
@@ -93,24 +91,28 @@ public class ActionHandler extends BaseHandler {
         int newX = player.getX() + x_;
         int newY = player.getY() + y_;
         for(ObjectEntity o : objectHandler.getEntities()) {
-            if(newX > (o.getX() - o.getWidth()) && newX < o.getX() + o.getWidth()
-                    && newY > (o.getY() - o.getHeight()) && newY < o.getY() + o.getHeight()) {
+            if(newX > (o.getX() - 96) && newX < o.getX() + o.getWidth()
+                        && newY > (o.getY() - 96) && newY < o.getY() + o.getHeight()) {
                 return o.getId();
             }
         }
         return -1;
     }
 
-    //TODO: Improve to handle object width and height
-    /*private int objectIdAt(int x_, int y_) {
+    private int objectIdAt(int x_, int y_) {
         int newX = player.getX() + x_;
         int newY = player.getY() + y_;
         for(ObjectEntity o : objectHandler.getEntities()) {
-            if(o.getX() == newX && o.getY() == newY) {
+            /*if(newX == o.getX() && newY == o.getY()) {
                 return o.getId();
+            }*/
+            if(newX >= o.getX() && newX <= o.getX() + o.getWidth() - 96) {
+                if(newY >= o.getY() && newY <= o.getY() + o.getHeight() - 96) {
+                    return o.getId();
+                }
             }
         }
         return -1;
-    }*/
+    }
     //endregion
 }
