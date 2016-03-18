@@ -46,54 +46,34 @@ public class Player extends BaseInstance {
 
     //region Constructor
     public Player(Context context_) {
-        // Grab integer values
+        context = context_;
+        bitmapDecoder = new BitmapDecoder(context);
+        x = 0; y = 0;
+        direction = 2;
+        meleePower = 0;
+        rangePower = 0;
+        meleeSpeed = 0f;
+        rangeSpeed = 0f;
+        defence = 0f;
+        healthMax = 0f;
+        healthCurrent = 0f;
         inventory = new ItemEntity[context_.getResources().getInteger(R.integer.inventSize)];
         quests = new int[context_.getResources().getInteger(R.integer.numberQuests)];
         levels = new int[context_.getResources().getInteger(R.integer.skills)];
         xp = new int[context_.getResources().getInteger(R.integer.skills)];
+        for(int i = 0; i < context_.getResources().getInteger(R.integer.inventSize); i++) {
+            inventory[i] = new ItemEntity();
+        }
+        for(int i = 0; i < context_.getResources().getInteger(R.integer.numberQuests); i++) {
+            quests[i] = 0;
+        }
+        for(int i = 0; i < context_.getResources().getInteger(R.integer.skills); i++) {
+            levels[i] = 0;
+        }
+        for(int i = 0; i < context_.getResources().getInteger(R.integer.skills); i++) {
+            xp[i] = 0;
+        }
         numberQuests = context_.getResources().getInteger(R.integer.numberQuests);
-
-        context = context_;
-        bitmapDecoder = new BitmapDecoder(context_);
-        File file = context_.getApplicationContext().getFileStreamPath("player.txt");
-        if(file.exists()) {
-            Log.e("Nathan", "Attempting to load player file..");
-            //Log.e("Nathan", "Deleted? = " + file.delete());
-            //newPlayer();
-            loadGame();
-            Log.e("Nathan", "Loaded player file..!");
-        } else {
-            Log.e("Nathan", "Creating player file..");
-            newPlayer();
-            loadGame();
-        }
-    }
-    //endregion
-
-    //region Methods
-    private void loadGame() {
-        // TODO: Load Player file
-    }
-
-    private void newPlayer() {
-        name = "";
-        x = 0;
-        y = 0;
-        direction = 2;
-        for (int i = 0; i < inventory.length; i++) {
-            inventory[i] = new ItemEntity(2, 1);
-        }
-        for (int q = 0; q < numberQuests; q++) {
-            quests[q] = 0;
-        }
-        for(int l = 0; l < levels.length; l++) {
-            levels[l] = 0;
-            xp[l] = 0;
-        }
-        meleePower = 0; meleeSpeed = 0f;
-        rangePower = 0; rangeSpeed = 0f;
-        healthMax = 0f; healthCurrent = 0f;
-        defence = 0f;
         images[0] = "player_north";
         images[1] = "player_east";
         images[2] = "player_south";
@@ -101,9 +81,11 @@ public class Player extends BaseInstance {
         for(int b = 0; b < 4; b++) {
             bitmap[b] = bitmapDecoder.decode(images[b]);
         }
-        calculateStats();
+        //calc stats?
     }
+    //endregion
 
+    //region Methods
     public void calculateStats() {
         meleePower = 5;
         if(levels[0] > 1) {

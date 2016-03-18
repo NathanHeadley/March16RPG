@@ -7,6 +7,7 @@ import com.zelphinstudios.march16rpg.entities.NPCEntity;
 import com.zelphinstudios.march16rpg.entities.ObjectEntity;
 import com.zelphinstudios.march16rpg.instances.Player;
 import com.zelphinstudios.march16rpg.util.BitmapDecoder;
+import com.zelphinstudios.march16rpg.util.FileLoader;
 
 public class ActionHandler extends BaseHandler {
 
@@ -26,6 +27,7 @@ public class ActionHandler extends BaseHandler {
                          TerrainHandler terrainHandler_,    ItemHandler itemHandler_) {
         context = context_;
         bitmapDecoder = new BitmapDecoder(context);
+        fileLoader = new FileLoader(context);
         player = player_;
         interfaceHandler = interfaceHandler_;
         objectHandler = objectHandler_;
@@ -39,7 +41,7 @@ public class ActionHandler extends BaseHandler {
     public void action(int actionId_) {
         switch(actionId_) {
             case 100:
-                itemHandler.addItem(0, 2);
+                fileLoader.savePlayerFile(player);
                 /*if(objectAt(0, -1) < 0) {
                     player.changeY(-1);
                 }
@@ -47,28 +49,25 @@ public class ActionHandler extends BaseHandler {
                 break;
 
             case 101:
-                itemHandler.addItem(2, 5);
-                /*if(objectAt(1, 0) < 0) {
+                itemHandler.addItem(2, 1);
+                if(objectAt(1, 0) < 0) {
                     player.changeX(1);
                 }
-                player.setDirection(1);*/
+                player.setDirection(1);
                 break;
 
             case 102:
-                itemHandler.removeItem(2, 3);
-                //itemHandler.removeItem(2, 2);
-                /*if(objectAt(0, 1) < 0) {
+                if(objectAt(0, 1) < 0) {
                     player.changeY(1);
                 }
-                player.setDirection(2);*/
+                player.setDirection(2);
                 break;
 
             case 103:
-                itemHandler.removeItem(2, 12);
-                /*if(objectAt(-1, 0) < 0) {
+                if(objectAt(-1, 0) < 0) {
                     player.changeX(-1);
                 }
-                player.setDirection(3);*/
+                player.setDirection(3);
                 break;
 
             case 104:
@@ -94,8 +93,6 @@ public class ActionHandler extends BaseHandler {
                     if (npcId >= 0) {
                         interfaceHandler.sendChat(npcHandler.getNpcs().get(npcId).getChat());
                     }
-                    itemHandler.addItem(0, 1);
-                    itemHandler.addItem(2, 1);
                 } else {
                     interfaceHandler.sendChat(interfaceHandler.getChat() + 1);
                 }

@@ -17,11 +17,13 @@ import com.zelphinstudios.march16rpg.instances.gui.Button;
 import com.zelphinstudios.march16rpg.instances.gui.GUI;
 import com.zelphinstudios.march16rpg.threads.NPCThread;
 import com.zelphinstudios.march16rpg.threads.PlayerThread;
+import com.zelphinstudios.march16rpg.util.FileLoader;
 import com.zelphinstudios.march16rpg.views.GameView;
 
 public class GameActivity extends Activity implements View.OnTouchListener {
 
     //region Variables
+    FileLoader fileLoader;
     Player player;
     ObjectHandler objectHandler;
     NPCHandler npcHandler;
@@ -40,7 +42,8 @@ public class GameActivity extends Activity implements View.OnTouchListener {
         super.onCreate(savedInstanceState_);
 
         //region Initiate Instances
-        player = new Player(this);
+        fileLoader = new FileLoader(this);
+        player = fileLoader.loadPlayerFile();
         objectHandler = new ObjectHandler(this);
         npcHandler = new NPCHandler(this);
         terrainHandler = new TerrainHandler(this);

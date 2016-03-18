@@ -3,12 +3,19 @@ package com.zelphinstudios.march16rpg.util;
 import android.content.Context;
 import android.util.Log;
 
+import com.zelphinstudios.march16rpg.entities.ItemEntity;
 import com.zelphinstudios.march16rpg.instances.Item;
 import com.zelphinstudios.march16rpg.instances.NPC;
 import com.zelphinstudios.march16rpg.instances.Object;
+import com.zelphinstudios.march16rpg.instances.Player;
 import com.zelphinstudios.march16rpg.instances.Terrain;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
@@ -25,6 +32,81 @@ public class FileLoader {
     public FileLoader(Context context_) {
         context = context_;
         bitmapDecoder = new BitmapDecoder(context);
+    }
+
+    public void savePlayerFile(Player player_) {
+        String toSave = "[player=" + player_.getName() + "|x=" + player_.getX() + "|y=" + player_.getY() + "|health="+player_.getHealthCurrent();
+        int count = 0;
+        for(ItemEntity itemEntity : player_.getInventory()) {
+            toSave += "|inventory=" + count + "=" + itemEntity.getId() + "=" + itemEntity.getQuantity();
+            count++;
+        }
+        count = 0;
+        for(int quest : player_.getQuests()) {
+            toSave += "|quest=" + count + "=" + quest;
+            count++;
+        }
+        count = 0;
+        for(int xp : player_.getXPs()) {
+            toSave += "|xp=" + count + "=" + xp;
+            count++;
+        }
+        toSave += "]";
+        Log.e("Nathan", toSave);
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(context.getFilesDir() + "player.txt")));
+            writer.write(toSave);
+            writer.close();
+        } catch (Exception io) {
+            Log.e("Nathan", io.toString());
+        }
+    }
+
+    public Player loadPlayerFile() {
+        // Future Updates; multiple players, load different looks
+        Player p = new Player(context);
+        String readLine;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(context.getFilesDir() + "player.txt")));
+            //BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.openFileInput("player")));
+            while((readLine = bufferedReader.readLine()) != null) {
+                if(readLine.substring(0, 1).equals("[")) {
+                    readLine = readLine.substring(1, readLine.length() - 1);
+                    String[] subSections = readLine.split("\\|");
+                    for(String s : subSections) {
+                        String[] subLine = s.split("=");
+                        switch(subLine[0]) {
+                            case "player":
+                                p.setName(subLine[1]);
+                                break;
+                            case "x":
+                                p.setX(Integer.parseInt(subLine[1]));
+                                break;
+                            case "y":
+                                p.setY(Integer.parseInt(subLine[1]));
+                                break;
+                            case "health":
+                                p.setHealthCurrent(Float.parseFloat(subLine[1]));
+                                break;
+                            case "inventory":
+                                p.setInventoryItem(Integer.parseInt(subLine[1]), Integer.parseInt(subLine[2]), Integer.parseInt(subLine[3]));
+                                break;
+                            case "quest":
+                                p.setQuest(Integer.parseInt(subLine[1]), Integer.parseInt(subLine[2]));
+                                break;
+                            case "xp":
+                                p.setXP(Integer.parseInt(subLine[1]), Integer.parseInt(subLine[2]));
+                                break;
+                        }
+                    }
+                }
+            }
+            bufferedReader.close();
+        } catch (IOException io) {
+            Log.e("Nathan", "Player Loading: " + io.toString());
+        }
+        Log.e("Nathan", ""+context.getFilesDir());
+        return p;
     }
 
     public Vector<Item> loadItemList() {

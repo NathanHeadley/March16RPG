@@ -7,6 +7,10 @@ public class ItemEntity  extends BaseEntity {
     //endregion
 
     //region Constructor
+    public ItemEntity() {
+        id = -1;
+        quantity = 0;
+    }
     public ItemEntity(int id_, int quantity_) {
         id = id_;
         quantity = quantity_;
