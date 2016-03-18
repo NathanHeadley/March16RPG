@@ -39,7 +39,7 @@ public class ActionHandler extends BaseHandler {
     public void action(int actionId_) {
         switch(actionId_) {
             case 100:
-                itemHandler.addItem(1, 1);
+                itemHandler.addItem(0, 2);
                 /*if(objectAt(0, -1) < 0) {
                     player.changeY(-1);
                 }
@@ -47,7 +47,7 @@ public class ActionHandler extends BaseHandler {
                 break;
 
             case 101:
-                itemHandler.removeItem(2, 1);
+                itemHandler.addItem(2, 5);
                 /*if(objectAt(1, 0) < 0) {
                     player.changeX(1);
                 }
@@ -55,17 +55,20 @@ public class ActionHandler extends BaseHandler {
                 break;
 
             case 102:
-                if(objectAt(0, 1) < 0) {
+                itemHandler.removeItem(2, 3);
+                //itemHandler.removeItem(2, 2);
+                /*if(objectAt(0, 1) < 0) {
                     player.changeY(1);
                 }
-                player.setDirection(2);
+                player.setDirection(2);*/
                 break;
 
             case 103:
-                if(objectAt(-1, 0) < 0) {
+                itemHandler.removeItem(2, 12);
+                /*if(objectAt(-1, 0) < 0) {
                     player.changeX(-1);
                 }
-                player.setDirection(3);
+                player.setDirection(3);*/
                 break;
 
             case 104:

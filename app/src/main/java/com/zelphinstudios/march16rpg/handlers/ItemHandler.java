@@ -35,7 +35,7 @@ public class ItemHandler extends BaseHandler {
     //endregion
 
     //region Methods
-    public boolean isInventoryFull() {
+    private boolean isInventoryFull() {
         for(ItemEntity itemEntity : player.getInventory()) {
             if(itemEntity.getId() == -1) {
                 return false;
@@ -43,24 +43,74 @@ public class ItemHandler extends BaseHandler {
         }
         return true;
     }
-    public boolean hasItem(int id_, int quantity_) {
-        for(int i = 0; i < MAX_ITEMS; i++) {
-            if(player.getItem(i).getId() == id_) {
-                if(player.getItem(i).getQuantity() >= quantity_) {
-                    return true;
+    private int hasSpace() {
+        int space = 0;
+        for(ItemEntity itemEntity : player.getInventory()) {
+            if(itemEntity.getId() == -1) {
+                space++;
+            }
+        }
+        return space;
+    }
+    private boolean hasItem(int id_) {
+        for (int i = 0; i < MAX_ITEMS; i++) {
+            if (player.getItem(i).getId() == id_) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean hasItem(int id_, int quantity_) {
+        if(items.get(id_).getStackable()) {
+            for (int i = 0; i < MAX_ITEMS; i++) {
+                if (player.getItem(i).getId() == id_) {
+                    if (player.getItem(i).getQuantity() >= quantity_) {
+                        return true;
+                    }
                 }
+            }
+        } else {
+            int stack = 0;
+            for (int i = 0; i < MAX_ITEMS; i++) {
+                if(player.getItem(i).getId() == id_) {
+                    stack++;
+                }
+            }
+            if (stack >= quantity_) {
+                return true;
             }
         }
         return false;
     }
     public boolean addItem(int id_, int quantity_) {
         if(!isInventoryFull()) {
-            for(int i = 0; i < MAX_ITEMS; i++) {
-                if(player.getItem(i).getId() == -1) {
-                    player.setInventoryItem(i, id_, quantity_);
-                    return true;
-                } else if (player.getItem(i).getId() == id_ && items.get(id_).getStackable()) {
-                    player.setInventoryItem(i, id_, quantity_ + player.getItem(i).getQuantity());
+            if(items.get(id_).getStackable()) {
+                if(hasItem(id_)) {
+                    for(int i = 0; i < MAX_ITEMS; i++) {
+                        if (player.getItem(i).getId() == id_) {
+                            player.setInventoryItem(i, id_, quantity_ + player.getItem(i).getQuantity());
+                            return true;
+                        }
+                    }
+                } else {
+                    for(int i = 0; i < MAX_ITEMS; i++) {
+                        if (player.getItem(i).getId() == -1) {
+                            player.setInventoryItem(i, id_, quantity_);
+                            return true;
+                        }
+                    }
+                }
+
+            } else {
+                if(hasSpace() >= quantity_) {
+                    for(int q = 0; q < quantity_; q++) {
+                        for (int i = 0; i < MAX_ITEMS; i++) {
+                            if (player.getItem(i).getId() == -1) {
+                                player.setInventoryItem(i, id_, 1);
+                                break;
+                            }
+                        }
+                    }
                     return true;
                 }
             }
@@ -68,24 +118,33 @@ public class ItemHandler extends BaseHandler {
         return false;
     }
     public boolean removeItem(int id_, int quantity_) {
-        Log.e("Nathan", "removeitem begin");
         if(hasItem(id_, quantity_)) {
-            Log.e("Nathan", "i has the item.");
-            for (int i = 0; i < MAX_ITEMS; i++) {
-                Log.e("Nathan", "checking an item");
-                if(player.getItem(i).getId() == id_) {
-                    Log.e("Nathan", "id is correct.");
-                    if(player.getItem(i).getQuantity() == quantity_) {
-                        Log.e("Nathan", "Removing item.");
-                        player.setInventoryItem(i, -1, 0);
-                        Log.e("Nathan", "Removed.");
-                        return true;
-                    } else if(player.getItem(i).getQuantity() > quantity_) {
-                        Log.e("Nathan", "");
-                        player.setInventoryItem(i, id_, player.getItem(i).getQuantity() - quantity_);
+            if (items.get(id_).getStackable()) {
+                for (int i = 0; i < MAX_ITEMS; i++) {
+                    if (player.getItem(i).getId() == id_) {
+                        if (player.getItem(i).getQuantity() == quantity_) {
+                            player.setInventoryItem(i, -1, 0);
+                            return true;
+                        } else if (player.getItem(i).getQuantity() > quantity_) {
+                            player.setInventoryItem(i, id_, player.getItem(i).getQuantity() - quantity_);
+                            return true;
+                        }
+                    }
+                }
+            } else {
+                int deleted = quantity_;
+                for (int i = 0; i < MAX_ITEMS; i++) {
+                    if(deleted > 0) {
+                        if(player.getItem(i).getId() == id_) {
+                            player.setInventoryItem(i, -1, 0);
+                            deleted--;
+                        }
+                    } else {
                         return true;
                     }
                 }
+                if(deleted == 0)
+                    return true;
             }
         }
         return false;
