@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.zelphinstudios.march16rpg.R;
+import com.zelphinstudios.march16rpg.entities.ItemEntity;
 import com.zelphinstudios.march16rpg.entities.NPCEntity;
 import com.zelphinstudios.march16rpg.util.BitmapDecoder;
 import com.zelphinstudios.march16rpg.util.FileLoader;
@@ -21,8 +22,6 @@ public class Player extends BaseInstance {
                 direction,
                 meleePower,
                 rangePower,
-                inventory[],
-                inventoryQuantity[],
                 quests[],
                 levels[],
                 xp[];
@@ -32,6 +31,8 @@ public class Player extends BaseInstance {
                   defence,
                   healthMax,
                   healthCurrent;
+
+    private ItemEntity inventory[];
 
     private String images[] = new String[4]; // Used for saving bitmaps
 
@@ -46,8 +47,7 @@ public class Player extends BaseInstance {
     //region Constructor
     public Player(Context context_) {
         // Grab integer values
-        inventory = new int[context_.getResources().getInteger(R.integer.inventSize)];
-        inventoryQuantity = new int[context_.getResources().getInteger(R.integer.inventSize)];
+        inventory = new ItemEntity[context_.getResources().getInteger(R.integer.inventSize)];
         quests = new int[context_.getResources().getInteger(R.integer.numberQuests)];
         levels = new int[context_.getResources().getInteger(R.integer.skills)];
         xp = new int[context_.getResources().getInteger(R.integer.skills)];
@@ -81,8 +81,7 @@ public class Player extends BaseInstance {
         y = 0;
         direction = 2;
         for (int i = 0; i < inventory.length; i++) {
-            inventory[i] = 0;
-            inventoryQuantity[i] = 0;
+            inventory[i] = new ItemEntity(2, 1);
         }
         for (int q = 0; q < numberQuests; q++) {
             quests[q] = 0;
@@ -160,17 +159,11 @@ public class Player extends BaseInstance {
     public float getHealthCurrent() {
         return healthCurrent;
     }
-    public int[] getInventory() {
+    public ItemEntity[] getInventory() {
         return inventory;
     }
-    public int getItem(int item_) {
+    public ItemEntity getItem(int item_) {
         return inventory[item_];
-    }
-    public int[] getInventoryQuantity() {
-        return inventoryQuantity;
-    }
-    public int getItemQuantity(int quantity_) {
-        return inventoryQuantity[quantity_];
     }
     public int[] getQuests() {
         return quests;
@@ -245,8 +238,7 @@ public class Player extends BaseInstance {
         healthCurrent = healthCurrent_;
     }
     public void setInventoryItem(int slot_, int id_, int quantity_) {
-        inventory[slot_] = id_;
-        inventoryQuantity[slot_] = quantity_;
+        inventory[slot_] = new ItemEntity(id_, quantity_);
     }
     public void setQuest(int quest_, int progression_) {
         quests[quest_] = progression_;

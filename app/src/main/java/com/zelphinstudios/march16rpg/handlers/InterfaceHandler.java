@@ -36,9 +36,9 @@ public class InterfaceHandler extends BaseHandler {
         gui.addButton(new Button(308, 772, 144, 144, 101, bitmapDecoder.decode("arrow_east"),   bitmapDecoder.decode("arrow_east_press"), true));
         gui.addButton(new Button(164, 916, 144, 144, 102, bitmapDecoder.decode("arrow_south"),  bitmapDecoder.decode("arrow_south_press"), true));
         gui.addButton(new Button( 20, 772, 144, 144, 103, bitmapDecoder.decode("arrow_west"),   bitmapDecoder.decode("arrow_west_press"), true));
-        gui.addButton(new Button(  0,   0, 270, 270, 104, bitmapDecoder.decode("button"),        bitmapDecoder.decode("button"), true));
+        gui.addButton(new Button(  0,   0, 270, 270, 104, bitmapDecoder.decode("button"),       bitmapDecoder.decode("button"), false));
         GUIs.addElement(gui);
-        gui = new GUI(0, 0, null, true); //inventory GUI TODO: MAKE ME
+        gui = new GUI(20, 20, bitmapDecoder.decode("invent_back"), true); //inventory GUI TODO: MAKE ME //452 - 20 = 432/3 = 144
         GUIs.addElement(gui);
         gui = new GUI(510, 664, bitmapDecoder.decode("chat_back"), false);
         gui.addTextField(new TextField(450, 80,  "", Paint.Align.CENTER, true));

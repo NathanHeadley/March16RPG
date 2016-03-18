@@ -5,13 +5,16 @@ import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.zelphinstudios.march16rpg.entities.ItemEntity;
 import com.zelphinstudios.march16rpg.entities.NPCEntity;
 import com.zelphinstudios.march16rpg.entities.ObjectEntity;
 import com.zelphinstudios.march16rpg.entities.TerrainEntity;
 import com.zelphinstudios.march16rpg.handlers.InterfaceHandler;
+import com.zelphinstudios.march16rpg.handlers.ItemHandler;
 import com.zelphinstudios.march16rpg.handlers.NPCHandler;
 import com.zelphinstudios.march16rpg.handlers.ObjectHandler;
 import com.zelphinstudios.march16rpg.handlers.TerrainHandler;
+import com.zelphinstudios.march16rpg.instances.Item;
 import com.zelphinstudios.march16rpg.instances.Player;
 import com.zelphinstudios.march16rpg.instances.gui.Button;
 import com.zelphinstudios.march16rpg.instances.gui.GUI;
@@ -31,11 +34,13 @@ public class GameView extends SurfaceView implements Runnable {
     private ObjectHandler objectHandler;
     private NPCHandler npcHandler;
     private TerrainHandler terrainHandler;
+    private ItemHandler itemHandler;
     //endregion
 
     //region Constructor
     public GameView(Context context_, Player player_, InterfaceHandler interfaceHandler_,
-                    ObjectHandler objectHandler_, NPCHandler npcHandler_, TerrainHandler terrainHandler_) {
+                    ObjectHandler objectHandler_, NPCHandler npcHandler_, TerrainHandler terrainHandler_,
+                    ItemHandler itemHandler_) {
         super(context_);
         surfaceHolder = getHolder();
         bitmapDecoder = new BitmapDecoder(context_);
@@ -44,6 +49,7 @@ public class GameView extends SurfaceView implements Runnable {
         objectHandler = objectHandler_;
         npcHandler = npcHandler_;
         terrainHandler = terrainHandler_;
+        itemHandler = itemHandler_;
     }
     //endregion
 
@@ -181,15 +187,17 @@ public class GameView extends SurfaceView implements Runnable {
                                 gui.getX(), gui.getY(), null);
                     }
                     for(Button button : gui.getButtons()) {
-                        if(button.getNotPressed() != null) {
-                            if(button.getState() == 0 || button.getPressed() == null) {
-                                canvas.drawBitmap(button.getNotPressed(),
-                                        button.getX(), button.getY(), null);
-                            } else if(button.getState() == 1) {
-                                canvas.drawBitmap(button.getPressed(),
-                                        button.getX(), button.getY(), null);
+                        if(button.isVisible()) {
+                            if (button.getNotPressed() != null) {
+                                if (button.getState() == 0 || button.getPressed() == null) {
+                                    canvas.drawBitmap(button.getNotPressed(),
+                                            button.getX(), button.getY(), null);
+                                } else if (button.getState() == 1) {
+                                    canvas.drawBitmap(button.getPressed(),
+                                            button.getX(), button.getY(), null);
+                                }
+                                button.setState(0);
                             }
-                            button.setState(0);
                         }
                     }
                     for(TextField textField : gui.getTextFields()) {
@@ -198,6 +206,13 @@ public class GameView extends SurfaceView implements Runnable {
                                     gui.getX() + textField.getX(), gui.getY() + textField.getY(), textField.getPaint());
                         }
                     }
+                }
+            }
+            //Draw Inventory
+            ItemEntity[] inventory = player.getInventory();
+            for(int i = 0; i < inventory.length; i++) {
+                if(inventory[i].getId() >= 0) {
+                    canvas.drawBitmap(itemHandler.getItem(inventory[i].getId()).getBitmap(0), 38 + (i * 100) - (i/4 * 400), 55 + ((i/4) * 125), null);
                 }
             }
             //endregion

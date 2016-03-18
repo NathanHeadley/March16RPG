@@ -39,17 +39,19 @@ public class ActionHandler extends BaseHandler {
     public void action(int actionId_) {
         switch(actionId_) {
             case 100:
-                if(objectAt(0, -1) < 0) {
+                itemHandler.addItem(1, 1);
+                /*if(objectAt(0, -1) < 0) {
                     player.changeY(-1);
                 }
-                player.setDirection(0);
+                player.setDirection(0);*/
                 break;
 
             case 101:
-                if(objectAt(1, 0) < 0) {
+                itemHandler.removeItem(2, 1);
+                /*if(objectAt(1, 0) < 0) {
                     player.changeX(1);
                 }
-                player.setDirection(1);
+                player.setDirection(1);*/
                 break;
 
             case 102:
@@ -89,6 +91,8 @@ public class ActionHandler extends BaseHandler {
                     if (npcId >= 0) {
                         interfaceHandler.sendChat(npcHandler.getNpcs().get(npcId).getChat());
                     }
+                    itemHandler.addItem(0, 1);
+                    itemHandler.addItem(2, 1);
                 } else {
                     interfaceHandler.sendChat(interfaceHandler.getChat() + 1);
                 }
