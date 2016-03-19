@@ -38,7 +38,7 @@ public class InterfaceHandler extends BaseHandler {
         gui.addButton(new Button( 20, 772, 144, 144, 103, bitmapDecoder.decode("arrow_west"),   bitmapDecoder.decode("arrow_west_press"), true));
         gui.addButton(new Button(  0,   0, 270, 270, 104, bitmapDecoder.decode("button"),       bitmapDecoder.decode("button"), false));
         GUIs.addElement(gui);
-        gui = new GUI(20, 20, bitmapDecoder.decode("invent_back"), true); //inventory GUI
+        gui = new GUI(20, 20, bitmapDecoder.decode("invent_back"), false); //inventory GUI
         GUIs.addElement(gui);
         gui = new GUI(510, 664, bitmapDecoder.decode("chat_back"), false);
         gui.addTextField(new TextField(450, 80,  "", Paint.Align.CENTER, true));
@@ -46,6 +46,19 @@ public class InterfaceHandler extends BaseHandler {
         gui.addTextField(new TextField(450, 190, "", Paint.Align.CENTER, true));
         gui.addTextField(new TextField(450, 245, "", Paint.Align.CENTER, true));
         gui.addTextField(new TextField(450, 300, "", Paint.Align.CENTER, true));
+        GUIs.addElement(gui);
+        gui = new GUI(20, 20, bitmapDecoder.decode("quest_back"), true);
+        gui.addTextField(new TextField(20, 60, "Quest List", Paint.Align.LEFT, true));
+        gui.addTextField(new TextField(20, 115, 150, "First Quest", Paint.Align.LEFT, true));
+        gui.addTextField(new TextField(20, 165, 151, "Second Quest",Paint.Align.LEFT, true));
+        gui.addTextField(new TextField(20, 215, 152, "Third Quest", Paint.Align.LEFT, true));
+        GUIs.addElement(gui);
+        gui = new GUI(0, 0, bitmapDecoder.decode("quest_help"), true);
+        gui.addTextField(new TextField(20, 20, "", Paint.Align.CENTER, true));
+        gui.addTextField(new TextField(20, 20, "", Paint.Align.CENTER, true));
+        gui.addTextField(new TextField(20, 20, "", Paint.Align.CENTER, true));
+        gui.addTextField(new TextField(20, 20, "", Paint.Align.CENTER, true));
+        gui.addTextField(new TextField(20, 20, "", Paint.Align.CENTER, true));
         GUIs.addElement(gui);
         //endregion
     }

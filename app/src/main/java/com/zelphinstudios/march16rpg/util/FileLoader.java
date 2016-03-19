@@ -105,7 +105,6 @@ public class FileLoader {
         } catch (IOException io) {
             Log.e("Nathan", "Player Loading: " + io.toString());
         }
-        Log.e("Nathan", ""+context.getFilesDir());
         return p;
     }
 

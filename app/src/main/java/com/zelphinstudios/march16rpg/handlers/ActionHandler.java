@@ -38,18 +38,24 @@ public class ActionHandler extends BaseHandler {
     //endregion
 
     //region Methods
+    /*
+    Action Numbers
+
+    Movement    [100-103]
+    X Button    [104]
+    Inventory   [105-125]
+    Quests      [150-200]
+     */
     public void action(int actionId_) {
         switch(actionId_) {
             case 100:
-                fileLoader.savePlayerFile(player);
-                /*if(objectAt(0, -1) < 0) {
+                if(objectAt(0, -1) < 0) {
                     player.changeY(-1);
                 }
-                player.setDirection(0);*/
+                player.setDirection(0);
                 break;
 
             case 101:
-                itemHandler.addItem(2, 1);
                 if(objectAt(1, 0) < 0) {
                     player.changeX(1);
                 }

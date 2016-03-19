@@ -209,10 +209,12 @@ public class GameView extends SurfaceView implements Runnable {
                 }
             }
             //Draw Inventory
-            ItemEntity[] inventory = player.getInventory();
-            for(int i = 0; i < inventory.length; i++) {
-                if(inventory[i].getId() >= 0) {
-                    canvas.drawBitmap(itemHandler.getItem(inventory[i].getId()).getBitmap(0), 38 + (i * 100) - (i/4 * 400), 55 + ((i/4) * 125), null);
+            if(interfaceHandler.getGUIs().get(1).isVisible()) {
+                ItemEntity[] inventory = player.getInventory();
+                for (int i = 0; i < inventory.length; i++) {
+                    if (inventory[i].getId() >= 0) {
+                        canvas.drawBitmap(itemHandler.getItem(inventory[i].getId()).getBitmap(0), 38 + (i * 100) - (i / 4 * 400), 55 + ((i / 4) * 125), null);
+                    }
                 }
             }
             //endregion
