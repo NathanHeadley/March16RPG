@@ -3,14 +3,16 @@ package com.zelphinstudios.march16rpg.threads;
 import android.os.SystemClock;
 
 import com.zelphinstudios.march16rpg.entities.NPCEntity;
+import com.zelphinstudios.march16rpg.entities.ObjectEntity;
 import com.zelphinstudios.march16rpg.handlers.NPCHandler;
+import com.zelphinstudios.march16rpg.handlers.ObjectHandler;
 import com.zelphinstudios.march16rpg.instances.Player;
 
 public class NPCThread extends BaseThread {
 
     //region Constructor
-    public NPCThread(Player player_, NPCHandler npcHandler_) {
-        super(player_, npcHandler_);
+    public NPCThread(Player player_, NPCHandler npcHandler_, ObjectHandler objectHandler_) {
+        super(player_, npcHandler_, objectHandler_);
     }
     //endregion
 
@@ -44,6 +46,27 @@ public class NPCThread extends BaseThread {
                     }
                 } else {
                     // TODO: NPC Walking (Implemented with attack range line)
+                    double walk = Math.random() - Math.random();
+                    if(walk > 0) {
+                        int direction = (int)(Math.random() * 4);
+                        switch(direction) {
+                            case 0: //north
+                                /*int newY = entity.getY() - 96;
+                                for(ObjectEntity object : objectHandler.getEntities()) {
+                                    if(object.getY() == newY) {
+                                        break;
+                                    }
+                                }
+                                entity.setY(entity.getY() + 96);*/
+                                break;
+                            case 1: //east
+                                break;
+                            case 2: //south
+                                break;
+                            case 3: //west
+                                break;
+                        }
+                    }
                 }
                 try {
                     Thread.sleep(100, 0);

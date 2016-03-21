@@ -23,8 +23,8 @@ public class NPCEntity extends BaseEntity {
     //region Constructor
     public NPCEntity(NPC npc_, int x_, int y_) {
         id = npc_.getId();
-        x = x_;
-        y = y_;
+        x = x_*96;
+        y = y_*96;
         level = npc_.getLevel();
         attack = npc_.getAttack();
         attackRange = npc_.getAttackRange();
@@ -35,6 +35,7 @@ public class NPCEntity extends BaseEntity {
         healthCurrent = healthMax;
         inCombat = false;
         lastAttack = 0;
+        visible = true;
     }
     //endregion
 

@@ -1,6 +1,7 @@
 package com.zelphinstudios.march16rpg.threads;
 
 import com.zelphinstudios.march16rpg.handlers.NPCHandler;
+import com.zelphinstudios.march16rpg.handlers.ObjectHandler;
 import com.zelphinstudios.march16rpg.instances.Player;
 
 public class BaseThread implements Runnable {
@@ -10,12 +11,14 @@ public class BaseThread implements Runnable {
     protected boolean running = false;
     protected Player player;
     protected NPCHandler npcHandler;
+    protected ObjectHandler objectHandler;
     //endregion
 
     //region Constructor
-    public BaseThread(Player player_, NPCHandler npcHandler_) {
+    public BaseThread(Player player_, NPCHandler npcHandler_, ObjectHandler objectHandler_) {
         player = player_;
         npcHandler = npcHandler_;
+        objectHandler = objectHandler_;
     }
     //endregion
 

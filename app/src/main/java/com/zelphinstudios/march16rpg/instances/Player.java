@@ -112,10 +112,10 @@ public class Player extends BaseInstance {
 
     //region Getters
     public int getX() {
-        return x;
+        return x/96;
     }
     public int getY() {
-        return y;
+        return y/96;
     }
     public int getDirection() {
         return direction;
@@ -184,10 +184,10 @@ public class Player extends BaseInstance {
 
     //region Setters
     public void setX(int x_) {
-        x = x_;
+        x = x_*96;
     }
     public void setY(int y_) {
-        y = y_;
+        y = y_*96;
     }
     public void changeX(int x_) {
         x += (x_ * 32);

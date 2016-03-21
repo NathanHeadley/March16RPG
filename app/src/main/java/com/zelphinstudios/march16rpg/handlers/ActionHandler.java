@@ -118,8 +118,8 @@ public class ActionHandler extends BaseHandler {
         int newX = player.getX() + x_;
         int newY = player.getY() + y_;
         for(NPCEntity n : npcHandler.getEntities()) {
-            if(newX > (n.getX() - 96) && newX < n.getX() + n.getWidth()
-                    && newY > (n.getY() - 96) && newY < n.getY() + n.getHeight()) {
+            if(newX > (n.getX() - 1) && newX < n.getX() + n.getWidth()
+                    && newY > (n.getY() - 1) && newY < n.getY() + n.getHeight()) {
                 return n.getId();
             }
         }
@@ -130,8 +130,8 @@ public class ActionHandler extends BaseHandler {
         int newX = player.getX() + x_;
         int newY = player.getY() + y_;
         for(ObjectEntity o : objectHandler.getEntities()) {
-            if(newX > (o.getX() - 96) && newX < o.getX() + o.getWidth()
-                    && newY > (o.getY() - 96) && newY < o.getY() + o.getHeight()) {
+            if(newX > (o.getX() - 1) && newX < o.getX() + o.getWidth()
+                    && newY > (o.getY() - 1) && newY < o.getY() + o.getHeight()) {
                 return o.getId();
             }
         }
@@ -142,8 +142,8 @@ public class ActionHandler extends BaseHandler {
         int newX = player.getX() + x_;
         int newY = player.getY() + y_;
         for(NPCEntity n : npcHandler.getEntities()) {
-            if(newX >= n.getX() && newX <= n.getX() + n.getWidth() - 96) {
-                if(newY >= n.getY() && newY <= n.getY() + n.getHeight() - 96) {
+            if(newX >= n.getX() && newX <= n.getX() + n.getWidth() - 1) {
+                if(newY >= n.getY() && newY <= n.getY() + n.getHeight() - 1) {
                     return n.getId();
                 }
             }
@@ -152,11 +152,11 @@ public class ActionHandler extends BaseHandler {
     }
 
     private int objectIdAt(int x_, int y_) {
-        int newX = player.getX() + (x_ * 96);
-        int newY = player.getY() + (y_ * 96);
+        int newX = player.getX() + x_;
+        int newY = player.getY() + y_;
         for(ObjectEntity o : objectHandler.getEntities()) {
-            if(newX >= o.getX() && newX <= o.getX() + o.getWidth() - 96) {
-                if(newY >= o.getY() && newY <= o.getY() + o.getHeight() - 96) {
+            if(newX >= o.getX() && newX <= o.getX() + o.getWidth() - 1) {
+                if(newY >= o.getY() && newY <= o.getY() + o.getHeight() - 1) {
                     return o.getId();
                 }
             }

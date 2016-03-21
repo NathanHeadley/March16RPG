@@ -3,13 +3,14 @@ package com.zelphinstudios.march16rpg.threads;
 import android.os.SystemClock;
 
 import com.zelphinstudios.march16rpg.handlers.NPCHandler;
+import com.zelphinstudios.march16rpg.handlers.ObjectHandler;
 import com.zelphinstudios.march16rpg.instances.Player;
 
 public class PlayerThread extends BaseThread {
 
     //region Constructor
-    public PlayerThread(Player player_, NPCHandler npcHandler_) {
-        super(player_, npcHandler_);
+    public PlayerThread(Player player_, NPCHandler npcHandler_, ObjectHandler objectHandler_) {
+        super(player_, npcHandler_, objectHandler_);
     }
     //endregion
 

@@ -50,8 +50,8 @@ public class GameActivity extends Activity implements View.OnTouchListener {
         interfaceHandler = new InterfaceHandler(this, player);
         itemHandler = new ItemHandler(this, player);
         actionHandler = new ActionHandler(this, player, interfaceHandler, objectHandler, npcHandler, terrainHandler, itemHandler);
-        npcThread = new NPCThread(player, npcHandler);
-        playerThread = new PlayerThread(player, npcHandler);
+        npcThread = new NPCThread(player, npcHandler, objectHandler);
+        playerThread = new PlayerThread(player, npcHandler, objectHandler);
         gameView = new GameView(this, player, interfaceHandler, objectHandler, npcHandler, terrainHandler, itemHandler);
         gameView.setOnTouchListener(this);
         //endregion

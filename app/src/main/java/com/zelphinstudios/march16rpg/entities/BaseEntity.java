@@ -27,10 +27,10 @@ public class BaseEntity {
         return id;
     }
     public int getX() {
-        return x;
+        return x/96;
     }
     public int getY() {
-        return y;
+        return y/96;
     }
     public int getWidth() {
         return width;
@@ -51,10 +51,10 @@ public class BaseEntity {
         id = id_;
     }
     public void setX(int x_) {
-        x = x_;
+        x = x_*96;
     }
     public void setY(int y_) {
-        y = y_;
+        y = y_*96;
     }
     public void setWidth(int width_) {
         width = width_;

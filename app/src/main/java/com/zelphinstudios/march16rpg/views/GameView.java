@@ -71,8 +71,8 @@ public class GameView extends SurfaceView implements Runnable {
             }
             // Draw actual terrains
             for(TerrainEntity entity : terrainHandler.getEntities()) {
-                float dX = 960 + (entity.getX() - player.getX());
-                float dY = 480 + (entity.getY() - player.getY());
+                float dX = 960 + (entity.getX()*96 - player.getX()*96);
+                float dY = 480 + (entity.getY()*96 - player.getY()*96);
                 if(dX > 0 && dX <= 1920 && dY >= 0 && dY <= 1080) {
                     canvas.drawBitmap(terrainHandler.getTerrains().get(entity.getId()).getBitmap(0),
                             dX, dY, null);
@@ -82,8 +82,8 @@ public class GameView extends SurfaceView implements Runnable {
             //region Draw Objects
             for(ObjectEntity entity : objectHandler.getEntities()) {
                 if(entity.isVisible()) {
-                    float dX = 960 + (entity.getX() - player.getX());
-                    float dY = 480 + (entity.getY() - player.getY());
+                    float dX = 960 + (entity.getX()*96 - player.getX()*96);
+                    float dY = 480 + (entity.getY()*96 - player.getY()*96);
                     if(dX >= 0 && dX <= 1920 && dY >= 0 && dY <= 1080) {
                         canvas.drawBitmap(objectHandler.getObjects().get(entity.getId()).getBitmap(entity.getDirection()),
                                 dX, dY, null);
@@ -94,8 +94,8 @@ public class GameView extends SurfaceView implements Runnable {
             //region Draw NPCs
             for(NPCEntity entity : npcHandler.getEntities()) {
                 if(entity.isVisible()) {
-                    float dX = 960 + (entity.getX() - player.getX());
-                    float dY = 480 + (entity.getY() - player.getY());
+                    float dX = 960 + (entity.getX()*96 - player.getX()*96);
+                    float dY = 480 + (entity.getY()*96 - player.getY()*96);
                     if(dX >= 0 && dX <= 1920 && dY >= 0 && dY <= 1080) {
                         canvas.drawBitmap(npcHandler.getNpcs().get(entity.getId()).getBitmap(entity.getDirection()),
                                 dX, dY, null);
