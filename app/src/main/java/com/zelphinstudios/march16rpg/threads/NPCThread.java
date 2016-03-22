@@ -1,6 +1,7 @@
 package com.zelphinstudios.march16rpg.threads;
 
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.zelphinstudios.march16rpg.entities.NPCEntity;
 import com.zelphinstudios.march16rpg.entities.ObjectEntity;
@@ -16,6 +17,10 @@ public class NPCThread extends BaseThread {
     }
     //endregion
 
+    //region Variables
+    private int interval = 100;
+    //endregion
+
     //region Methods
     @Override
     public void run() {
@@ -25,8 +30,7 @@ public class NPCThread extends BaseThread {
                     if (getDistance(entity) <= entity.getAttackRange()) {
                         if (entity.getHealthCurrent() > 0) {
                             if (player.getHealthCurrent() != 0) {
-                                if (SystemClock.elapsedRealtime() - (entity.getSpeed() * 1000) >
-                                        entity.getLastAttack()) {
+                                if (SystemClock.elapsedRealtime() - (entity.getSpeed() * 1000) > entity.getLastAttack()) {
                                     float damage = (entity.getAttack() / 100.0f) * (100.0f - player.getDefence());
                                     player.changeHealth((float) -Math.ceil(damage));
                                     entity.setLastAttack(SystemClock.elapsedRealtime());
@@ -45,34 +49,42 @@ public class NPCThread extends BaseThread {
                         // TODO: NPC Walking
                     }
                 } else {
-                    // TODO: NPC Walking (Implemented with attack range line)
                     double walk = Math.random() - Math.random();
                     if(walk > 0) {
                         int direction = (int)(Math.random() * 4);
                         switch(direction) {
                             case 0: //north
-                                /*int newY = entity.getY() - 96;
-                                for(ObjectEntity object : objectHandler.getEntities()) {
-                                    if(object.getY() == newY) {
-                                        break;
-                                    }
+                                if(objectAt(entity, 0, -1) == -1) {
+                                    entity.changeY(-1);
+                                    interval = 500;
                                 }
-                                entity.setY(entity.getY() + 96);*/
                                 break;
                             case 1: //east
+                                if(objectAt(entity, 1, 0) == -1) {
+                                    entity.changeX(1);
+                                    interval = 500;
+                                }
                                 break;
                             case 2: //south
+                                if(objectAt(entity, 0, 1) == -1) {
+                                    entity.changeY(1);
+                                    interval = 500;
+                                }
                                 break;
                             case 3: //west
+                                if(objectAt(entity, -1, 0) == -1) {
+                                    entity.changeX(-1);
+                                    interval = 500;
+                                }
                                 break;
                         }
                     }
                 }
-                try {
-                    Thread.sleep(100, 0);
-                } catch (InterruptedException ie) {
-                    ie.printStackTrace();
-                }
+            }
+            try {
+                Thread.sleep(interval, 0);
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
             }
         }
     }
@@ -80,6 +92,17 @@ public class NPCThread extends BaseThread {
     private float getDistance(NPCEntity entity_) {
         return (float)Math.sqrt(Math.pow((player.getX() - entity_.getX()), 2)
                 + Math.pow((player.getY() - entity_.getY()), 2));
+    }
+
+    private int objectAt(NPCEntity entity_, int x_, int y_) {
+        int newX = entity_.getX() + x_;
+        int newY = entity_.getY() + y_;
+        for(ObjectEntity o : objectHandler.getEntities()) {
+            if(newX > (o.getX() - 1) && newX < (o.getX() + o.getWidth()) && newY > (o.getY() - 1) && newY < (o.getY() + o.getHeight())) {
+                return o.getId();
+            }
+        }
+        return -1;
     }
     //endregion
 }

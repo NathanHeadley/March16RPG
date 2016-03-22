@@ -48,6 +48,7 @@ public class ActionHandler extends BaseHandler {
      */
     public void action(int actionId_) {
         switch(actionId_) {
+            //FIXME: CLIPPING
             case 100:
                 if(objectAt(0, -1) < 0) {
                     player.changeY(-1);
@@ -103,6 +104,12 @@ public class ActionHandler extends BaseHandler {
                     interfaceHandler.sendChat(interfaceHandler.getChat() + 1);
                 }
                 break;
+
+            case 150:
+            case 151:
+            case 152:
+                Log.e("Nathan", "ACTION 150-152 PRESSED.");
+                break;
         }
     }
 
@@ -130,8 +137,8 @@ public class ActionHandler extends BaseHandler {
         int newX = player.getX() + x_;
         int newY = player.getY() + y_;
         for(ObjectEntity o : objectHandler.getEntities()) {
-            if(newX > (o.getX() - 1) && newX < o.getX() + o.getWidth()
-                    && newY > (o.getY() - 1) && newY < o.getY() + o.getHeight()) {
+            if(newX > (o.getX() - 1) && newX < (o.getX() + o.getWidth())
+                    && newY > (o.getY() - 1) && newY < (o.getY() + o.getHeight())) {
                 return o.getId();
             }
         }

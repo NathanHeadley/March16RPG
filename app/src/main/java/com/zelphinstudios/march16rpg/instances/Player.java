@@ -117,6 +117,12 @@ public class Player extends BaseInstance {
     public int getY() {
         return y/96;
     }
+    public int getAbsX() {
+        return x;
+    }
+    public int getAbsY() {
+        return y;
+    }
     public int getDirection() {
         return direction;
     }

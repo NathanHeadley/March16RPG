@@ -32,10 +32,10 @@ public class Object extends BaseInstance {
 
     //region Getters
     public int getWidth() {
-        return width;
+        return width/96;
     }
     public int getHeight() {
-        return height;
+        return height/96;
     }
     public int getAction() {
         return action;
@@ -47,10 +47,10 @@ public class Object extends BaseInstance {
 
     //region Setters
     public void setWidth(int width_) {
-        width = width_;
+        width = width_*96;
     }
     public void setHeight(int height_) {
-        height = height_;
+        height = height_*96;
     }
     public void setAction(int action_) {
         action = action_;

@@ -27,7 +27,7 @@ public class NPCHandler extends BaseHandler {
         // Entities - NPC, X, Y
 
         //region Entity List
-        entities.addElement(new NPCEntity(npcs.get(1), 4, 4));
+        entities.addElement(new NPCEntity(npcs.get(1), 3, 1));
         //endregion
     }
     //endregion

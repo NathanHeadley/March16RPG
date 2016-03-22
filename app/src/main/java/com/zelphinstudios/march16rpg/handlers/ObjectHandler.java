@@ -1,6 +1,7 @@
 package com.zelphinstudios.march16rpg.handlers;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.zelphinstudios.march16rpg.entities.ObjectEntity;
 import com.zelphinstudios.march16rpg.instances.Object;
@@ -23,7 +24,6 @@ public class ObjectHandler extends BaseHandler {
 
         // Loading objects
         objects = fileLoader.loadObjectList();
-
         // Entities - Id, X, Y
 
         //region Entity List

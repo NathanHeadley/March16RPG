@@ -43,7 +43,8 @@ public class GameActivity extends Activity implements View.OnTouchListener {
 
         //region Initiate Instances
         fileLoader = new FileLoader(this);
-        player = fileLoader.loadPlayerFile();
+        player = new Player(this);
+        //player = fileLoader.loadPlayerFile();
         objectHandler = new ObjectHandler(this);
         npcHandler = new NPCHandler(this);
         terrainHandler = new TerrainHandler(this);
