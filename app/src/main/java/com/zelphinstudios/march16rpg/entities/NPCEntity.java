@@ -5,7 +5,9 @@ import com.zelphinstudios.march16rpg.instances.NPC;
 public class NPCEntity extends BaseEntity {
 
     //region Variables
-    private int level,
+    private int spawnX,
+            spawnY,
+            level,
             attack,
             attackRange,
             walkRange;
@@ -25,6 +27,8 @@ public class NPCEntity extends BaseEntity {
         id = npc_.getId();
         x = x_*96;
         y = y_*96;
+        spawnX = x;
+        spawnY = y;
         level = npc_.getLevel();
         attack = npc_.getAttack();
         attackRange = npc_.getAttackRange();
@@ -52,6 +56,12 @@ public class NPCEntity extends BaseEntity {
     //endregion
 
     //region Getters
+    public int getSpawnX() {
+        return spawnX;
+    }
+    public int getSpawnY() {
+        return spawnY;
+    }
     public int getLevel() {
         return level;
     }
@@ -85,6 +95,12 @@ public class NPCEntity extends BaseEntity {
     //endregion
 
     //region Setters
+    public void setSpawnX(int x_) {
+        spawnX = x_;
+    }
+    public void setSpawnY(int y_) {
+        spawnY = y_;
+    }
     public void setLevel(int level_) {
         level = level_;
     }

@@ -134,11 +134,11 @@ public class ActionHandler extends BaseHandler {
     }
 
     private int objectAt(int x_, int y_) {
-        int newX = player.getX() + x_;
-        int newY = player.getY() + y_;
+        int newX = player.getAbsX() + x_;
+        int newY = player.getAbsY() + y_;
         for(ObjectEntity o : objectHandler.getEntities()) {
-            if(newX > (o.getX() - 1) && newX < (o.getX() + o.getWidth())
-                    && newY > (o.getY() - 1) && newY < (o.getY() + o.getHeight())) {
+            if(newX > (o.getAbsX() - 96) && newX < (o.getAbsX() + o.getAbsWidth())
+                    && newY > (o.getAbsY() - 96) && newY < (o.getAbsY() + o.getAbsHeight())) {
                 return o.getId();
             }
         }

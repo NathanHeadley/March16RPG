@@ -46,39 +46,10 @@ public class NPCThread extends BaseThread {
                             // TODO: NPC Death
                         }
                     } else {
-                        // TODO: NPC Walking
+                        walk(entity); //TODO: force direction of target
                     }
                 } else {
-                    double walk = Math.random() - Math.random();
-                    if(walk > 0) {
-                        int direction = (int)(Math.random() * 4);
-                        switch(direction) {
-                            case 0: //north
-                                if(objectAt(entity, 0, -1) == -1) {
-                                    entity.changeY(-1);
-                                    interval = 500;
-                                }
-                                break;
-                            case 1: //east
-                                if(objectAt(entity, 1, 0) == -1) {
-                                    entity.changeX(1);
-                                    interval = 500;
-                                }
-                                break;
-                            case 2: //south
-                                if(objectAt(entity, 0, 1) == -1) {
-                                    entity.changeY(1);
-                                    interval = 500;
-                                }
-                                break;
-                            case 3: //west
-                                if(objectAt(entity, -1, 0) == -1) {
-                                    entity.changeX(-1);
-                                    interval = 500;
-                                }
-                                break;
-                        }
-                    }
+                    walk(entity);
                 }
             }
             try {
@@ -89,16 +60,56 @@ public class NPCThread extends BaseThread {
         }
     }
 
+    private void walk(NPCEntity entity_) {
+        double walk = Math.random() - Math.random();
+        if(walk > 0) {
+            int direction = (int)(Math.random() * 4);
+            switch(direction) {
+                case 0: //north
+                    if(objectAt(entity_, 0, -1) == -1) {
+                        entity_.changeY(-1);
+                        interval = 500;
+                    }
+                    break;
+                case 1: //east
+                    if(objectAt(entity_, 1, 0) == -1) {
+                        entity_.changeX(1);
+                        interval = 500;
+                    }
+                    break;
+                case 2: //south
+                    if(objectAt(entity_, 0, 1) == -1) {
+                        entity_.changeY(1);
+                        interval = 500;
+                    }
+                    break;
+                case 3: //west
+                    if(objectAt(entity_, -1, 0) == -1) {
+                        entity_.changeX(-1);
+                        interval = 500;
+                    }
+                    break;
+            }
+        }
+    }
+
     private float getDistance(NPCEntity entity_) {
         return (float)Math.sqrt(Math.pow((player.getX() - entity_.getX()), 2)
                 + Math.pow((player.getY() - entity_.getY()), 2));
     }
 
     private int objectAt(NPCEntity entity_, int x_, int y_) {
-        int newX = entity_.getX() + x_;
-        int newY = entity_.getY() + y_;
+        int newX = entity_.getAbsX() + x_;
+        int newY = entity_.getAbsY() + y_;
+        if((newX < (entity_.getSpawnX() - entity_.getWalkRange())) || (newX > (entity_.getSpawnX() + entity_.getWalkRange()))) {
+            return -2;
+        }
+        if((newY < (entity_.getSpawnY() - entity_.getWalkRange())) || (newY > (entity_.getSpawnY() + entity_.getWalkRange()))) {
+            return -2;
+        }
         for(ObjectEntity o : objectHandler.getEntities()) {
-            if(newX > (o.getX() - 1) && newX < (o.getX() + o.getWidth()) && newY > (o.getY() - 1) && newY < (o.getY() + o.getHeight())) {
+            if(newX > (o.getAbsX() - 96) && newX < (o.getAbsX() + o.getAbsWidth())
+                    && newY > (o.getAbsY() - 96) && newY < (o.getAbsY() + o.getAbsHeight())) {
                 return o.getId();
             }
         }

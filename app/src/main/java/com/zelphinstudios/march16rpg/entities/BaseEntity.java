@@ -44,6 +44,12 @@ public class BaseEntity {
     public int getHeight() {
         return height/96;
     }
+    public int getAbsWidth() {
+        return width;
+    }
+    public int getAbsHeight() {
+        return height;
+    }
     public int getDirection() {
         return direction;
     }
